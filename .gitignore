@@ -36,3 +36,4 @@
 /nbdist/
 /.nb-gradle/
 /build/
+/.gradle/

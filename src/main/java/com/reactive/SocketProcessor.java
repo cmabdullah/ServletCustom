@@ -51,10 +51,12 @@ public class SocketProcessor implements Runnable {
 						Data data = (Data) selectionKey.attachment();
 						switch (interest) {
 							case SelectionKey.OP_READ:
-								data.read();
+//								data.read();
+								data.readV2();
 								break;
 							case SelectionKey.OP_WRITE:
 								data.write();
+//								data.writeV2();
 								break;
 							default:
 								break;

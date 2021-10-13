@@ -33,15 +33,18 @@ public class SocketProcessor implements Runnable {
 				SocketChannel socketChannel = connectionQueue.poll();
 				if (Objects.nonNull(socketChannel)) {
 					socketChannel.configureBlocking(false);
-					SelectionKey selectionKey = socketChannel.register(selector, SelectionKey.OP_READ);
-					Data data = new Data(socketChannel, selector, selectionKey);
-					selectionKey.attach(data);
+					SelectionKey requestSelectionKey = socketChannel.register(selector, SelectionKey.OP_READ);
+					Data data = new Data(socketChannel, selector, requestSelectionKey);
+					requestSelectionKey.attach(data);
 				}
 
-				int availableChannelForProcess = selector.selectNow();
-				if (availableChannelForProcess == 0) {
-					continue;
-				}
+//				int availableChannelForProcess = selector.selectNow();
+//				if (availableChannelForProcess == 0) {
+//					continue;
+//				}
+
+				if (selector.select(100) == 0) // Did something happen on some registered Channels during the last 100ms?
+					continue; // No, wait some more
 
 				Set<SelectionKey> selectionKeys = selector.selectedKeys();
 
@@ -52,12 +55,16 @@ public class SocketProcessor implements Runnable {
 						switch (interest) {
 							case SelectionKey.OP_READ:
 //								data.read();
-								data.readV2();
+//								data.readV2();
+								data.readV3(selectionKey);
 								break;
 							case SelectionKey.OP_WRITE:
-								data.write();
+//								data.write();
 //								data.writeV2();
+								data.writeV3(selectionKey);
 								break;
+								case SelectionKey.OP_CONNECT:
+									data.connect(selectionKey);
 							default:
 								break;
 						}

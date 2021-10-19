@@ -54,6 +54,11 @@ public class ServerRequestProcessor implements Processor {
 					urlPath = firstLineArray[1];
 				}
 
+				if (urlPath.equals("favicon.ico")){
+					closeConnection(socketChannel);
+					return;
+				}
+
 				URL finalUri = new URL("http://localhost:8080"+urlPath);
 				System.out.println("webclient calling url "+finalUri.toString() + " Request id : "+requestId);
 				selectionKey.interestOps(selectionKey.interestOps() & ~SelectionKey.OP_READ); // We are already connected: remove interest in CONNECT event

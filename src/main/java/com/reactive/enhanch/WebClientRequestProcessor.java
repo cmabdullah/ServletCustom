@@ -73,10 +73,16 @@ public class WebClientRequestProcessor implements Processor {
 			System.out.println("response length size is : "+length+ " for request ID "+requestId);
 			if (length == -1) {
 				closeConnection(webClientSocketChannel);
-			} else if (length > 0){
+			} else if (length == 0){
+				// response is not prepared yet
+				// this.selectionKey.interestOps(SelectionKey.OP_READ);
+				// https://stackoverflow.com/questions/34490207/the-difference-of-socketchannel-read-in-async-and-sync-mode
+			}
+
+			else if (length > 0){
 				readBuff.flip();
 				stringBuilder.append(StandardCharsets.UTF_8.decode(readBuff));
-			}
+
 			String str = stringBuilder.toString();
 
 
@@ -98,6 +104,7 @@ public class WebClientRequestProcessor implements Processor {
 			closeConnection(webClientSocketChannel);
 			clientKey.cancel();//cancel subscription
 			//this.selectionKey.interestOps(SelectionKey.OP_WRITE);
+			}
 
 		} catch (IOException e) {
 			closeConnection(webClientSocketChannel);

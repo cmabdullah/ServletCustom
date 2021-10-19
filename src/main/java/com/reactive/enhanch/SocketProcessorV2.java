@@ -54,7 +54,7 @@ public class SocketProcessorV2 implements Runnable {
 						int interest = selectionKey.interestOps();
 						Processor processor = (Processor) selectionKey.attachment();
 						String requestIde = processor.getRequestId();
-						System.out.println("requestIde "+requestIde +" is entering mode -> " +interest + " with class "+processor.getClass());
+						// System.out.println("requestIde "+requestIde +" is entering mode -> " +interest + " with class "+processor.getClass());
 						switch (interest) {
 							case SelectionKey.OP_READ:
 								processor.read();//1

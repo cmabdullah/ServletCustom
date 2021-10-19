@@ -69,27 +69,27 @@ public class WebClientRequestProcessor implements Processor {
 		// create mono or flask
 
 		try {
-//			int length = webClientSocketChannel.read(readBuff);
-//			System.out.println("response length size is : "+length+ " for request ID "+requestId);
-//			if (length == -1) {
-//				closeConnection(webClientSocketChannel);
-//			} else if (length > 0){
-//				readBuff.flip();
-//				stringBuilder.append(StandardCharsets.UTF_8.decode(readBuff));
-//			}
-//			String str = stringBuilder.toString();
+			int length = webClientSocketChannel.read(readBuff);
+			System.out.println("response length size is : "+length+ " for request ID "+requestId);
+			if (length == -1) {
+				closeConnection(webClientSocketChannel);
+			} else if (length > 0){
+				readBuff.flip();
+				stringBuilder.append(StandardCharsets.UTF_8.decode(readBuff));
+			}
+			String str = stringBuilder.toString();
 
 
 			//block thread hear until get response
-			String res = "";
-			while (webClientSocketChannel.read(readBuff) != -1) {
-				String temp = new String(readBuff.array()).trim();
-				res = res + temp;
-				readBuff.clear();
-			}
-			String[] response = res.split("\r\n");
-			System.out.println("The result is : " + response[6]);
-			String str = response[6];
+//			String res = "";
+//			while (webClientSocketChannel.read(readBuff) != -1) {
+//				String temp = new String(readBuff.array()).trim();
+//				res = res + temp;
+//				readBuff.clear();
+//			}
+//			String[] response = res.split("\r\n");
+//			System.out.println("The result is : " + response[6]);
+//			String str = response[6];
 
 			System.out.println("response from upstream  for request ID : "+requestId+" is \n" +str);
 

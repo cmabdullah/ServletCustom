@@ -6,6 +6,7 @@ import com.paradox.servlet.MyHttpServletRequest;
 import com.paradox.servlet.MyHttpServletResponse;
 import com.paradox.servlet.client.AddServlet;
 import com.paradox.servlet.client.IndexServlet;
+import com.paradox.servlet.client.RPCServlet;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -38,6 +39,12 @@ public class ProcessRequest extends Thread{
                     if (uri.startsWith("/addition")){
                         //AddServlet
                         MyHttpServlet myHttpServlet = new AddServlet();
+                        myHttpServlet.doGet(myHttpServletRequest, myHttpServletResponse);
+                    }
+
+                    if (uri.startsWith("/rpc")){
+                        //AddServlet
+                        MyHttpServlet myHttpServlet = new RPCServlet();
                         myHttpServlet.doGet(myHttpServletRequest, myHttpServletResponse);
                     }
 

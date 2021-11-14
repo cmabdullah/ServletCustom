@@ -5,7 +5,9 @@ import java.nio.channels.SelectionKey;
 public interface Processor {
 	void read();
 	void write();
-	void connect(SelectionKey selectionKey);
+	default void connect(SelectionKey selectionKey){
+		System.out.println("Calling connector");
+	}
 
 	String getRequestId();
 }

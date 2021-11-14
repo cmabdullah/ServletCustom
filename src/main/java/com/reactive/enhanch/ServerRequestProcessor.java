@@ -1,9 +1,7 @@
 package com.reactive.enhanch;
 
 import java.io.IOException;
-import java.net.URI;
 import java.net.URL;
-import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
@@ -84,11 +82,6 @@ public class ServerRequestProcessor implements Processor {
 			closeConnection(socketChannel);
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public void connect(SelectionKey selectionKey) {
-
 	}
 
 	private void closeConnection(SocketChannel socketChannel) {

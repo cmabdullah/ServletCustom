@@ -2,9 +2,7 @@ package com.reactive;
 
 import com.reactive.enhanch.SocketProcessorV2;
 
-import java.net.Socket;
 import java.nio.channels.SocketChannel;
-import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class App {

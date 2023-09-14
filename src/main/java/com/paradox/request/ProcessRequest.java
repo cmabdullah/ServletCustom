@@ -45,6 +45,7 @@ public class ProcessRequest extends Thread{
                     if (uri.startsWith("/rpc")){
                         //AddServlet
                         MyHttpServlet myHttpServlet = new RPCServlet();
+                        System.out.println(Thread.currentThread().getName());
                         myHttpServlet.doGet(myHttpServletRequest, myHttpServletResponse);
                     }
 

@@ -16,13 +16,16 @@ public class App {
         AcceptRequest acceptRequest = new AcceptRequest(Config.getInstance().getPort());
 
         Thread acceptRequestThread = new Thread(acceptRequest);
+        acceptRequestThread.setName("acceptRequestThread");
         acceptRequestThread.start();
 
         int requestProcessor = Config.getInstance().getRequestProcessor();
 
         for (int i = 0; i<requestProcessor; i++){
             ProcessRequest processRequest = new ProcessRequest();
-            new Thread(processRequest).start();
+            Thread thread = new Thread(processRequest);
+            thread.setName("Custom tomcat "+i);
+            thread.start();
         }
 
     }

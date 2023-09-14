@@ -44,7 +44,7 @@ public class RPCServlet extends MyHttpServlet {
 
 	private String httpCall() {
 		try {
-			String url = "http://localhost:8080/api/v1/product/add?a1=cm&a2=khan";
+			String url = "http://localhost:8080/api/v1/product/add?a1=cm&a2=khulna";
 			System.out.println("calling url " + url);
 			HttpRequest request = HttpRequest.newBuilder()
 					.uri(new URI(url))
